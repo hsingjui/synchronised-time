@@ -1,2 +1,1 @@
-# synchronised-time
-同步东哥时间
+# 同步东哥时间
