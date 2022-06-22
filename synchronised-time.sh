@@ -5,7 +5,7 @@
 ## 定义允许的误差时间，单位毫秒
 case $# in
 0)
-    TimeError=40
+    TimeError=80
     ;;
 1)
     case $1 in
@@ -42,7 +42,7 @@ function Check() {
 }
 
 function Main() {
-    Check
+    Check()
     local Interface="https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5"
     if [[ $(echo $(($(curl -sSL "${Interface}" | awk -F '\"' '{print$8}') - $(eval echo "$(date +%s)$(date +%N | cut -c1-3)"))) | sed "s|\-||g") -lt 10 ]]; then
         echo -e "\n\033[32m------------ 检测到当前本地时间与京东服务器的时间差小于 10ms 因此不同步 ------------\033[0m\n"
@@ -83,4 +83,4 @@ function Main() {
     fi
 }
 
-Main "$@"
+Main()
